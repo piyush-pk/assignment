@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block body %}
+<!-- Button trigger modal -->
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            <strong>Notification:  </strong> {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="" action="/update" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="m-3 col">
+                            <!-- <label for="exampleInputEmail1" class="form-label">First Name</label> -->
+                            <input type="text" class="form-control" name="fname" required placeholder="First name"
+                                id="exampleInputEmail1" value="{{user.first_name}}" aria-describedby="emailHelp">
+                            <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                        </div>
+                        <div class="m-3 col">
+                            <input type="text" class="form-control" name="lname" required placeholder="Last name"
+                                id="exampleInputEmail1" value="{{user.last_name}}" aria-describedby="emailHelp">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="m-3 col">
+                            <input type="email" class="form-control" name="email" placeholder="xyz@example.com"
+                                id="exampleInputEmail1" value="{{user.email}}" aria-describedby="emailHelp">
+                        </div>
+                        <div class="m-3 col">
+                            <input type="password" class="form-control" name="password" placeholder="Enter New Password"
+                                id="exampleInputPassword1">
+                        </div>
+                    </div>
+                    <div class="m-3">
+                        <input type="text" class="form-control" name="address" placeholder="Street, City, Pincode"
+                        value="{{user.address}}" id="exampleInputPassword1">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-success">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal End -->
+
+
+
+<div class="container ">
+    <div class="text-center">
+        <img class="img-fluid border border-4 border-dark rounded-circle"
+            src="https://cdn.pixabay.com/photo/2017/02/23/13/05/profile-2092113_960_720.png" height="200px"
+            width="200px" alt="profile">
+    </div>
+    <div class="container my-3 row">
+        <div class="col">
+            <h4 class="border border-2 rounded"> First Name: {{user.first_name}}</h4>
+        </div>
+        <div class="col">
+            <h4 class="border borde r-2 rounded"> Last Name: {{user.last_name}}</h4>
+        </div>
+    </div>
+    <div class="container my-3 row text-left">
+        <div class="col">
+            <h4 class="border border-2 rounded"> Email: {{user.email}}</h4>
+        </div>
+        <div class="col">
+            <h4 class="border border-2 rounded"> Address: {{user.address}}</h4>
+        </div>
+    </div>
+    <div class="row m-3">
+        <button type="button" class="btn btn-outline-warning col" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Edit Profile
+        </button>
+        <form class="col row mx-2" action="/delete" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-danger " >Delete Profile</button>
+        </form>
+    </div>
+</div>
+
+{% endblock body %}

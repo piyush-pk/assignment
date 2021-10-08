@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block body %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            <strong>Notification:  </strong> {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+<div class="container text-center my-5 border rounded">
+    <h1 class="display-4">Internship Assignment</h1>
+    <u>
+        <p>Login & Singup Project With JWT Authentication</p>
+    </u>
+</div>
+
+<div class="container my-3">
+    <form class="" action="/register" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="m-3 col">
+                <!-- <label for="exampleInputEmail1" class="form-label">First Name</label> -->
+                <input type="text" class="form-control" name="fname" required placeholder="First name"
+                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+            </div>
+            <div class="m-3 col">
+                <input type="text" class="form-control" name="lname" required placeholder="Last name"
+                    id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+        </div>
+        <div class="row">
+            <div class="m-3 col">
+                <input type="email" class="form-control" name="email" placeholder="xyz@example.com"
+                    id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="m-3 col">
+                <input type="password" class="form-control" name="password" placeholder="Enter Password"
+                    id="exampleInputPassword1">
+            </div>
+        </div>
+        <div class="m-3">
+            <input type="text" class="form-control" name="address" placeholder="Street, City, Pincode"
+                id="exampleInputPassword1">
+        </div>
+
+        <div class="row m-3">
+            <button type="submit" class="btn btn-outline-danger">Sign Up</button>
+        </div>
+    </form>
+    <hr>
+    <div class="row m-3">
+        <a class="btn btn-outline-success" href="/">If Already Registered, Login </a></div>
+</div>
+{% endblock body %}
