@@ -36,6 +36,7 @@ def home(request):
 
             # return response
         except Exception as e:
+            print(e)
             messages.error(
                 request, "Please Check Email & Password or Login again ")
     if request.user.is_authenticated:
@@ -60,7 +61,8 @@ def register(request):
                 return render(request, 'signup.html')
 
             messages.success(request, "Thanks For registration, Now You Can Login .")
-        except:
+        except Exception as e:
+            print(e)
             messages.error(
                 request, "Something went wrong Please recheck Details Or Try To Login.")
 
