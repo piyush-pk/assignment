@@ -11,7 +11,7 @@ def home(request):
     if request.method == 'POST':
         try:
             url = "http://127.0.0.1:8000/api/login/"
-            res = r.post(url, data={
+            res = r.post(url, verify=False, data={
                 "email": dict(request.POST)['email'][0],
                 "password": dict(request.POST)['password'][0]
             }).json()
@@ -49,7 +49,7 @@ def register(request):
         try:
             url = "http://127.0.0.1:8000/api/register"
             data = dict(request.POST)
-            res = r.post(url, data={'first_name': data['fname'][0],
+            res = r.post(url, verify=False, data={'first_name': data['fname'][0],
                                     'last_name': data['lname'][0],
                                     'email': data['email'][0],
                                     "address": data['address'][0],
@@ -80,7 +80,7 @@ def profile(request):
             headers = CaseInsensitiveDict()
             headers["Accept"] = "application/json"
             headers["Authorization"] = f"Bearer {token}"
-            res = r.get(url, data={"id": request.user.id},
+            res = r.get(url, verify=False, data={"id": request.user.id},
                         headers=headers).json()
             # print(res)
             return render(request, 'profile.html', {"user": res['payload']})
@@ -104,7 +104,7 @@ def update(request):
             headers = CaseInsensitiveDict()
             headers["Accept"] = "application/json"
             headers["Authorization"] = f"Bearer {token}"
-            res = r.patch(url, data={"first_name": dict(request.POST)['fname'][0],
+            res = r.patch(url, verify=False, data={"first_name": dict(request.POST)['fname'][0],
                                    "last_name": dict(request.POST)['lname'][0],
                                    "email": dict(request.POST)['email'][0], "address": dict(request.POST)['address'][0]}, headers=headers).json()
             # print(res)
@@ -121,7 +121,7 @@ def delete(request):
             logout(request)
             url = "http://127.0.0.1:8000/api/delete"
             id = request.COOKIES.get("id")
-            res = r.delete(url, data = {
+            res = r.delete(url, verify=False, data = {
                 "id": id,
             }).json()
             print(res, "jvgjhsdbgdf")
