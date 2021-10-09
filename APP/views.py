@@ -10,7 +10,7 @@ User = get_user_model()
 def home(request):
     if request.method == 'POST':
         try:
-            url = "http://127.0.0.1:8000/api/login/"
+            url = "https://inter-assignment.herokuapp.com/api/login/"
             res = r.post(url, verify=False, data={
                 "email": dict(request.POST)['email'][0],
                 "password": dict(request.POST)['password'][0]
@@ -47,7 +47,7 @@ def home(request):
 def register(request):
     if request.method == 'POST':
         try:
-            url = "http://127.0.0.1:8000/api/register"
+            url = "https://inter-assignment.herokuapp.com/api/register"
             data = dict(request.POST)
             res = r.post(url, verify=False, data={'first_name': data['fname'][0],
                                     'last_name': data['lname'][0],
@@ -76,7 +76,7 @@ def profile(request):
         token = request.COOKIES.get('access')
         # print(token)
         if request.user.is_authenticated:
-            url = "http://127.0.0.1:8000/api/profile"
+            url = "https://inter-assignment.herokuapp.com/api/profile"
             headers = CaseInsensitiveDict()
             headers["Accept"] = "application/json"
             headers["Authorization"] = f"Bearer {token}"
@@ -100,7 +100,7 @@ def update(request):
         try:
             id = request.COOKIES.get("id")
             token = request.COOKIES.get("access")
-            url = f"http://127.0.0.1:8000/api/update/{id}"
+            url = f"https://inter-assignment.herokuapp.com/api/update/{id}"
             headers = CaseInsensitiveDict()
             headers["Accept"] = "application/json"
             headers["Authorization"] = f"Bearer {token}"
@@ -119,7 +119,7 @@ def delete(request):
     if request.method == 'POST':
         try:
             logout(request)
-            url = "http://127.0.0.1:8000/api/delete"
+            url = "https://inter-assignment.herokuapp.com/api/delete"
             id = request.COOKIES.get("id")
             res = r.delete(url, verify=False, data = {
                 "id": id,
