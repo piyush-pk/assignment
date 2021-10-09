@@ -38,7 +38,7 @@ def home(request):
         except Exception as e:
             print(e)
             messages.error(
-                request, "Please Check Email & Password or Login again ")
+                request, "Please Check Email & Password or Login again " + str(e))
     if request.user.is_authenticated:
         return render(request, 'profile.html')
     return render(request, 'index.html')
@@ -64,7 +64,7 @@ def register(request):
         except Exception as e:
             print(e)
             messages.error(
-                request, "Something went wrong Please recheck Details Or Try To Login.")
+                request, "Something went wrong Please recheck Details Or Try To Login." + str(e))
 
         return render(request, 'signup.html')
 
@@ -85,7 +85,7 @@ def profile(request):
             # print(res)
             return render(request, 'profile.html', {"user": res['payload']})
     except Exception as e:
-        messages.error(request, "Please Login Again")
+        messages.error(request, "Please Login Again " + str(e))
         # print("error ", e)
     return redirect(home)
 
@@ -110,7 +110,7 @@ def update(request):
             # print(res)
         except Exception as e:
             # print(e)
-            messages.error(request, "Some Error Occurs, Please Login Again ! ")
+            messages.error(request, "Some Error Occurs, Please Login Again ! " + str(e))
             return render(request, "profile.html")
     return render(request, 'profile.html')
 
