@@ -198,5 +198,11 @@ MESSAGE_TAGS = {
     # 50: 'critical',
 }
 
+ELASTICSEARCH_DSL={
+    'default': {
+        'hosts': 'elasticsearch'
+    },
+}
+
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 SILENCED_SYSTEM_CHECKS = ['security.W019']
